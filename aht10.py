@@ -41,6 +41,15 @@ class AHT10:
         else:
             return ((self.results_parsed[1] / KILOBYTE_CONST) * AHT_TEMPERATURE_CONST - AHT_TEMPERATURE_OFFSET) * FARENHEIT_MULTIPLIER + FARENHEIT_OFFSET
 
+    def dew_point(self):
+            self.mode = 0
+            t = self.temperature()
+            h = self.humidity()
+            A = 17.27
+            B = 237.7
+            alpha = ((A * t) / (B + t)) + math.log(h / 100.0)
+            return (B * alpha) / (A - alpha)
+
     def set_mode(self, mode):
         if not mode in [0, 1]:
             raise ValueError('Mode must be either 0 for Celsius or 1 Farenheit')
