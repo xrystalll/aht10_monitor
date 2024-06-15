@@ -1,4 +1,4 @@
-import time
+import time, math
 
 AHT10_ADDRESS = 0x38
 AHT10_READ_DELAY_MS = 75
